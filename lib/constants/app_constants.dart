@@ -1,7 +1,7 @@
 class Appconstants {
-  static const String projectid = "bidder_app";
-  static const String endpoint = "http://localhost/v1";
-  static const String dbID = "product_database";
-  static const String collectionID = "product_collection";
-  static const String collectionID2 = "bidder_collection";
+  static const String projectid = <projectid>;
+  static const String endpoint = <endpoint>;
+  static const String dbID = <dbID>;
+  static const String collectionID = <collectionID>;
+  static const String collectionID2 = <collectionID2.;
 }
