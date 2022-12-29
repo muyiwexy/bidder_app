@@ -107,100 +107,28 @@ class PrivateProvider extends ChangeNotifier {
   }
 
   _displayfirstdocument() async {
-    var result = await databases!.listDocuments(
-      collectionId: Appconstants.collectionID,
-    );
-    _item = result.documents
-        .map((docmodel) => DocModel.fromJson(docmodel.data))
-        .toList();
+    // do something
   }
 
   _displayseconddocument() async {
-    var result = await databases?.listDocuments(
-      collectionId: Appconstants.collectionID2,
-    );
-    _seconditem = result?.documents
-        .map((seconditem) => DocModel2.fromJson(seconditem.data))
-        .toList();
+    // do something
   }
 
   updatefirstdocument(int price, String id) async {
-    try {
-      var result = await databases!.updateDocument(
-        collectionId: Appconstants.collectionID,
-        documentId: id,
-        data: {
-          'bidderPrice': price,
-        },
-      );
-      _checkbidder();
-    } catch (e) {
-      rethrow;
-    }
+    // do something
   }
 
   _checkbidder() async {
-    var result = await databases!
-        .listDocuments(collectionId: Appconstants.collectionID2, queries: [
-      Query.equal('bidderNumber', ['${user!.id}'])
-    ]);
-
-    if (result.total == 0) {
-      createbidder();
-    }
+    // do something
   }
 
   createbidder() async {
-    try {
-      var result = await databases!.createDocument(
-        collectionId: Appconstants.collectionID2,
-        documentId: 'unique()',
-        data: {
-          'bidderNumber': user!.id,
-        },
-      );
-    } catch (e) {
-      rethrow;
-    }
+    do something
   }
 
   subscribe() {
-    try {
-      final realtime = Realtime(client);
-      realtimeSubscription = realtime.subscribe([
-        'databases.${Appconstants.dbID}.collections.${Appconstants.collectionID}.documents',
-        'databases.${Appconstants.dbID}.collections.${Appconstants.collectionID2}.documents'
-      ]);
-      realtimeSubscription?.stream.listen((event) {
-        if (event.events.contains(
-            'databases.${Appconstants.dbID}.collections.${Appconstants.collectionID2}.documents.*.create')) {
-          DocModel2 myDocModel2 = DocModel2.fromJson(event.payload);
-          _seconditem!.add(myDocModel2);
-          notifyListeners();
-        }
-        if (event.events.contains(
-            'databases.${Appconstants.dbID}.collections.${Appconstants.collectionID2}.documents.*.delete')) {
-          _seconditem!
-              .removeWhere((element) => element.id == event.payload['\$id']);
-          notifyListeners();
-        }
-        if (event.events.contains(
-            'databases.${Appconstants.dbID}.collections.${Appconstants.collectionID}.documents.*')) {
-          _item
-              ?.map((element) =>
-                  element.bidderPrice = event.payload['bidderPrice'])
-              .toList();
-          notifyListeners();
-        }
-      });
-    } catch (e) {
-      rethrow;
-    }
+    do something
   }
-
-  @override
-  void dispose() {
-    realtimeSubscription?.close();
-    super.dispose();
-  }
+  
+  // close subscription function
 }
